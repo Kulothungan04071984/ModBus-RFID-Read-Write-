@@ -220,7 +220,7 @@ namespace Modbus_HF_Reader
             this.panel1.Controls.Add(this.rbtInventory);
             this.panel1.Controls.Add(this.rdbRead);
             this.panel1.Controls.Add(this.rdbWrite);
-            this.panel1.Location = new System.Drawing.Point(17, 73);
+            this.panel1.Location = new System.Drawing.Point(12, 90);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(123, 94);
             this.panel1.TabIndex = 20;
@@ -228,7 +228,7 @@ namespace Modbus_HF_Reader
             // rbtInventory
             // 
             this.rbtInventory.AutoSize = true;
-            this.rbtInventory.Location = new System.Drawing.Point(3, 3);
+            this.rbtInventory.Location = new System.Drawing.Point(4, 8);
             this.rbtInventory.Name = "rbtInventory";
             this.rbtInventory.Size = new System.Drawing.Size(69, 17);
             this.rbtInventory.TabIndex = 18;
