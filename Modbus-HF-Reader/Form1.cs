@@ -126,7 +126,7 @@ namespace Modbus_HF_Reader
 
 
                 }
-                rtblog.AppendText(RcData + " -" + count);
+                rtblog.AppendText(RcData + " -" + count + "\n");
             }
             catch (Exception ex)
             {
@@ -227,6 +227,7 @@ namespace Modbus_HF_Reader
                     SRModBusReader.PortName = com;
                     //SRModBusReader.PortName = "COM5";
                     SRModBusReader.BaudRate = 115200;
+                    //SRModBusReader.BaudRate = 9600;
                     //SRModBusReader.DataBits = 8;
                     //SRModBusReader.Parity = Parity.None;
                     //SRModBusReader.StopBits = StopBits.One;

@@ -66,7 +66,6 @@ namespace Modbus_HF_Reader
             // 
             // SRModBusReader
             // 
-            this.SRModBusReader.BaudRate = 11500;
             this.SRModBusReader.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SRModBusReader_DataReceived);
             // 
             // rdbRead
