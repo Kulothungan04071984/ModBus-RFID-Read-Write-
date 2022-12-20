@@ -57,6 +57,7 @@ namespace Modbus_HF_Reader
             this.btnExcute = new System.Windows.Forms.Button();
             this.btnSendRequest = new System.Windows.Forms.Button();
             this.txtSenRequest = new System.Windows.Forms.TextBox();
+            this.cmbBlock = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -149,7 +150,7 @@ namespace Modbus_HF_Reader
             this.btnDisConnect.Name = "btnDisConnect";
             this.btnDisConnect.Size = new System.Drawing.Size(94, 33);
             this.btnDisConnect.TabIndex = 7;
-            this.btnDisConnect.Text = "Dis Connect";
+            this.btnDisConnect.Text = "Disconnect";
             this.btnDisConnect.UseVisualStyleBackColor = false;
             this.btnDisConnect.Click += new System.EventHandler(this.btnDisConnect_Click);
             // 
@@ -209,9 +210,9 @@ namespace Modbus_HF_Reader
             // Result
             // 
             this.Result.BackColor = System.Drawing.Color.SkyBlue;
+            this.Result.Controls.Add(this.cmbBlock);
             this.Result.Controls.Add(this.txtWriteData);
             this.Result.Controls.Add(this.label6);
-            this.Result.Controls.Add(this.txtSingleBlock);
             this.Result.Controls.Add(this.label5);
             this.Result.Controls.Add(this.txtData);
             this.Result.Controls.Add(this.label4);
@@ -243,10 +244,11 @@ namespace Modbus_HF_Reader
             // 
             // txtSingleBlock
             // 
-            this.txtSingleBlock.Location = new System.Drawing.Point(76, 129);
+            this.txtSingleBlock.Location = new System.Drawing.Point(26, 385);
             this.txtSingleBlock.Name = "txtSingleBlock";
-            this.txtSingleBlock.Size = new System.Drawing.Size(228, 24);
+            this.txtSingleBlock.Size = new System.Drawing.Size(75, 20);
             this.txtSingleBlock.TabIndex = 5;
+            this.txtSingleBlock.Visible = false;
             // 
             // label5
             // 
@@ -336,6 +338,24 @@ namespace Modbus_HF_Reader
             this.txtSenRequest.TabIndex = 13;
             this.txtSenRequest.Visible = false;
             // 
+            // cmbBlock
+            // 
+            this.cmbBlock.FormattingEnabled = true;
+            this.cmbBlock.Items.AddRange(new object[] {
+            "--Select Block--",
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07"});
+            this.cmbBlock.Location = new System.Drawing.Point(91, 129);
+            this.cmbBlock.Name = "cmbBlock";
+            this.cmbBlock.Size = new System.Drawing.Size(109, 23);
+            this.cmbBlock.TabIndex = 8;
+            // 
             // New
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -344,6 +364,7 @@ namespace Modbus_HF_Reader
             this.Controls.Add(this.txtSenRequest);
             this.Controls.Add(this.btnSendRequest);
             this.Controls.Add(this.btnExcute);
+            this.Controls.Add(this.txtSingleBlock);
             this.Controls.Add(this.btnSetProtocol);
             this.Controls.Add(this.Result);
             this.Controls.Add(this.groupBox2);
@@ -396,5 +417,6 @@ namespace Modbus_HF_Reader
         private System.Windows.Forms.TextBox txtSenRequest;
         private System.Windows.Forms.TextBox txtWriteData;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbBlock;
     }
 }

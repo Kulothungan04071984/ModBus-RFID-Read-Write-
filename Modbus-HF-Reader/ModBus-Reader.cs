@@ -28,7 +28,7 @@ namespace Modbus_HF_Reader
         string writeBlock = string.Empty;
         string reverseData = string.Empty;
         string rData = string.Empty;
-        string first8 = string.Empty;
+        bool SetProtocol = false;
 
         private const int BufferSize = 1024;
         private readonly object m_syncRoot = new object();
@@ -130,7 +130,7 @@ namespace Modbus_HF_Reader
                 else if (rdbRead.Checked)
                 {
 
-                    if (txtSingleBlock.Text.ToString() != string.Empty && flog == 1)
+                    if (cmbBlock.Text != string.Empty && flog == 1)
                     {
                         if (Excute == 2)
                         {
@@ -163,11 +163,11 @@ namespace Modbus_HF_Reader
                 else if("Register write request." == rMessgae)
                     rMessgae= "Sending Request";
                 else if ("AM PM Togg" == rMessgae)
-                    rMessgae = "Request Received";
+                    rMessgae = "Ready to Execute";
                 else if ("Request mode." == rMessgae && rdbRead.Checked)
-                        rMessgae = "Read Data";
+                        rMessgae = "Reading Data";
                 else if ("Request mode." == rMessgae && rdbWrite.Checked)
-                    rMessgae = "Writen Data";
+                    rMessgae = "Data Written";
 
                 //if ("[00]" == rMessgae)
                 //    rMessgae = "Data Written ";
@@ -188,13 +188,13 @@ namespace Modbus_HF_Reader
            // btnSetProtocol.Enabled = false;
             btnExcute.Enabled = false;
             txtUID.Enabled = false;
-            txtSingleBlock.Enabled = false;
+            cmbBlock.Enabled = false;
             txtWriteData.Enabled = false;
             txtData.Enabled = false;
             var ports = SerialPort.GetPortNames();
             //serialPort1.PortName = Se
             cmbPort.DataSource = ports;
-
+            //cmbPort.Items.Add("Select Port");
             
 
             //var input = "01 04 00 00 00 01 31 CA";
@@ -427,7 +427,7 @@ namespace Modbus_HF_Reader
         {
             if (serialPort1.IsOpen)
             {
-
+               
                 serialPort1.DiscardOutBuffer();
                 serialPort1.DiscardInBuffer();
 
@@ -438,7 +438,7 @@ namespace Modbus_HF_Reader
                 serialPort1.DiscardInBuffer();
                 if (flog == 1)
                 {
-
+                    SetProtocol = true;
                     var state2 = new AsyncState(this.serialPort1, Encoding.ASCII.GetBytes(string.Concat("010C00030410002101020000", this.NewLine)));
                     this.serialPort1.BaseStream.BeginWrite(state2.Buffer, 0, state2.Buffer.Length, m_endWriteCallback, state2);
                     Thread.Sleep(1000);
@@ -447,7 +447,7 @@ namespace Modbus_HF_Reader
                 }
                 else
                 {
-
+                    SetProtocol = false;
                     var state2 = new AsyncState(this.serialPort1, Encoding.ASCII.GetBytes(string.Concat("010C00030410002101000000", this.NewLine)));
                     this.serialPort1.BaseStream.BeginWrite(state2.Buffer, 0, state2.Buffer.Length, m_endWriteCallback, state2);
                     Thread.Sleep(1000);
@@ -509,8 +509,8 @@ namespace Modbus_HF_Reader
                 flog = 0;
                 write = 0;
                 txtWriteData.Enabled = false;
-               // btnSetProtocol.Enabled = true;
-                txtSingleBlock.Enabled = false;
+                // btnSetProtocol.Enabled = true;
+                cmbBlock.Enabled = false;
                 protocol();
 
 
@@ -535,8 +535,11 @@ namespace Modbus_HF_Reader
                 write = 0;
                 btnExcute.Enabled = false;
                 txtWriteData.Enabled = false;
-                txtSingleBlock.Enabled = true;
-                protocol();
+                cmbBlock.Enabled = true;
+                if (!SetProtocol)
+                    protocol();
+                else
+                    btnExcute.Enabled = true;
             }
             else
                 flog = 0;
@@ -557,7 +560,7 @@ namespace Modbus_HF_Reader
                 flog = 1;
                 write = 0;
                 btnExcute.Enabled = true;
-                txtSingleBlock.Enabled = true;
+                cmbBlock.Enabled = true;
                 txtWriteData.Enabled = true;
                // protocol();
             }
@@ -581,11 +584,11 @@ namespace Modbus_HF_Reader
                 {
                     Excute = 2;
                     Read = 0;
-                    if (txtSingleBlock.Text.ToString() != string.Empty)
+                    if (cmbBlock.Text.ToString() != string.Empty)
                     {
-                        var blockCount = txtSingleBlock.Text.Length;
+                        var blockCount = cmbBlock.Text.Length;
                         if (blockCount == 2)
-                            BlockChange = "010B000304180220" + txtSingleBlock.Text + "0000";
+                            BlockChange = "010B000304180220" + cmbBlock.Text.ToString() + "0000";
                         InventoryStr = BlockChange;
 
                     }
@@ -618,7 +621,7 @@ namespace Modbus_HF_Reader
                     }
                    
 
-                    writeBlock = "010F000304180221" + txtSingleBlock.Text.ToString() + rData + "0000";
+                    writeBlock = "010F000304180221" + cmbBlock.Text.ToString() + rData + "0000";
 
                     InventoryStr = writeBlock;
                     txtData.Text = string.Empty;
