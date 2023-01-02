@@ -137,7 +137,7 @@ namespace Modbus_HF_Reader
         private void Form1_Load(object sender, EventArgs e)
         {
             var ports = SerialPort.GetPortNames();
-
+          
             cmbPortNumber.DataSource = ports;
             txtData.Enabled = false;
             txtUID.Enabled = false;

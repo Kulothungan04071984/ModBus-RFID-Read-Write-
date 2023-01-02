@@ -192,14 +192,15 @@ namespace Modbus_HF_Reader
             txtWriteData.Enabled = false;
             txtData.Enabled = false;
             var ports = SerialPort.GetPortNames();
-            //serialPort1.PortName = Se
+        
             cmbPort.DataSource = ports;
+            //cmbPort.Items.Insert(0, "Select Port");
             //cmbPort.Items.Add("Select Port");
-            
+
 
             //var input = "01 04 00 00 00 01 31 CA";
             //var byteeeee = input.Split(' ').ToArray();
-           
+
             //dataValue = new byte[byteeeee.Length];
             //for (int i = 0; i < byteeeee.Length; i++)
             //{
@@ -207,7 +208,7 @@ namespace Modbus_HF_Reader
             //    int int_value = Convert.ToInt32(hex_value, 16);
             //    dataValue[i] = (byte)int_value;
             //}
-         
+
             //byte[] data = new byte[8];
             //data[0] = 1;
             //data[1] = 4;
@@ -218,7 +219,7 @@ namespace Modbus_HF_Reader
             //data[6] = 49;
             //data[7] = 202;
 
-            
+
             //serialPort1.Write(dataValue, 0, dataValue.Length);
             // serialPort1.Write(input);
 
